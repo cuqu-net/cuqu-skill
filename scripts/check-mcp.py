@@ -10,7 +10,7 @@ import urllib.request
 
 HOST = os.environ.get(
     "CUQU_MCP_HOST",
-    "https://dashscope.aliyuncs.com/api/v1/mcps/mcp-NjgwMTQ1ODAyODFj/mcp",
+    "https://agent.cuqu.net/mcp",
 )
 KEY = os.environ.get("CUQU_API_KEY", "")
 
