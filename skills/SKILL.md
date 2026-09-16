@@ -9,7 +9,7 @@ description: 粗趣（CUQU找搭子）线下兴趣社交平台技能。当用户
 
 ## 环境变量
 
-- `CUQU_MCP_HOST`：MCP 服务地址（默认 `https://dashscope.aliyuncs.com/api/v1/mcps/mcp-NjgwMTQ1ODAyODFj/mcp`）
+- `CUQU_MCP_HOST`：MCP 服务地址（默认 `https://agent.cuqu.net/mcp`）
 - `CUQU_API_KEY`：用户个人 API Key（`cq-sk-` 开头），与用户粗趣账号绑定
 
 两个变量缺失时，引导用户到粗趣开放平台扫码登录获取，不要臆造 Key。

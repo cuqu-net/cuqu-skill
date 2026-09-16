@@ -26,7 +26,7 @@ npx skills add liqicuhk-ui/cuqu-skill -g
 使用前需要配置两个环境变量：
 
 ```
-export CUQU_MCP_HOST=https://dashscope.aliyuncs.com/api/v1/mcps/mcp-NjgwMTQ1ODAyODFj/mcp
+export CUQU_MCP_HOST=https://agent.cuqu.net/mcp
 export CUQU_API_KEY=cq-sk-xxxxxxxx
 ```
 
