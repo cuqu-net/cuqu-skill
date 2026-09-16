@@ -7,10 +7,10 @@
 ## 安装
 
 ```
-npx skills add cuqu/cuqu-skill -g
+npx skills add liqicuhk-ui/cuqu-skill -g
 ```
 
-> 仓库路径以实际上线为准（GitHub `cuqu/cuqu-skill`，或替换为光天科技组织名）。
+> 仓库路径以实际上线为准（GitHub `liqicuhk-ui/cuqu-skill`，或替换为光天科技组织名）。
 
 ### 一键安装提示词
 
@@ -18,7 +18,7 @@ npx skills add cuqu/cuqu-skill -g
 
 ```
 请帮我安装粗趣 skill：
-npx skills add cuqu/cuqu-skill -g
+npx skills add liqicuhk-ui/cuqu-skill -g
 ```
 
 ## 配置

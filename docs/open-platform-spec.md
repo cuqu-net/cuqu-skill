@@ -7,7 +7,7 @@
 
 ```
 用户 ──微信扫码──> 开放平台(open.cuqu.net) ──签发──> 个人 API Key(cq-sk-*)
-用户 ──复制提示词──> AI Agent ──npx skills add──> GitHub cuqu/cuqu-skill
+用户 ──复制提示词──> AI Agent ──npx skills add──> GitHub liqicuhk-ui/cuqu-skill
 Agent ──Bearer cq-sk-xxx──> API 网关 ──uid 鉴权──> cuqu MCP / 业务后端
 ```
 
@@ -64,8 +64,8 @@ cuqu MCP 部署在 dashscope 网关（百炼），当前那把 `sk-ws-` 是**平
 
 ## 五、上线检查清单
 
-- [ ] GitHub 建仓 `cuqu/cuqu-skill`，推送本包 `skills/` 内容
-- [ ] `npx skills add cuqu/cuqu-skill -g` 实测安装（Claude Code / Codex 各测一次）
+- [ ] GitHub 建仓 `liqicuhk-ui/cuqu-skill`，推送本包 `skills/` 内容
+- [ ] `npx skills add liqicuhk-ui/cuqu-skill -g` 实测安装（Claude Code / Codex 各测一次）
 - [ ] 网关部署 + 全链路测试（扫码 → Key → Agent 装技能 → query_activities → register_event）
 - [ ] 旧平台级 `sk-ws-` Key 作废轮换（已在 9-11 会话中暴露过）
 - [ ] 开放平台域名建议 `open.cuqu.net`（Cloudflare Pages/Workers，与主站同账号）
