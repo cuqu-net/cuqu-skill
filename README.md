@@ -51,6 +51,13 @@ export CUQU_API_KEY=cq-sk-xxxxxxxx
 "生成这个活动的分享链接"
 ```
 
+## 线上状态（2026-09-23）
+
+- 网关 `https://agent.cuqu.net/mcp` 已上线，对接真实后台数据（非 mock）
+- 官网 AI 可读活动页：https://cuqu.net/activities/list/ （静态 SSR + schema.org Event，每日自动更新）
+- AI 助手导读：https://cuqu.net/llms.txt
+- 实测：单次调用延迟约 1.2s（上游 dashscope MCP），单 Key 限流 60 req/min
+
 ## 功能
 
 | 能力 | 说明 | 文档目录 |
