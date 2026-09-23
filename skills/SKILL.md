@@ -58,7 +58,7 @@ curl -s -X POST "$CUQU_MCP_HOST" \
 
 ## 通用规则
 
-1. **activity_type 必须精确匹配**：用「桌游聚会」不要用「桌游」，用「飞盘」不要用「玩飞盘」。查不到先换标准词重试，再放宽 location/date。常用标准词：桌游聚会、飞盘、徒步、羽毛球、钓鱼、二次元、读书会、烘焙。
+1. **activity_type 匹配行为（2026-09-23 实测）**：后端对 type 字段做**子串包含匹配（大小写敏感）**，不匹配 title/description/tags。标准词最稳：桌游聚会、飞盘、徒步、羽毛球、钓鱼、二次元、读书会、烘焙。技巧：①不传 activity_type 可**全量拉取**当前所有活动；②想找具体玩法（如"狼人杀"）用 `keyword` 参数，别塞进 activity_type；③注意大小写（"city walk" 不匹配 "City Walk"）。
 2. **写操作先确认**：`create_activity`、`register_event`、`create_payment` 执行前，先向用户复述关键信息（活动名、时间、金额）并获确认。
 3. **不复述内部标识**：不要向用户展示或解释 activity_id、order_id、session 等内部标识，它们仅用于后续调用。
 4. **报名带渠道**：`register_event` 若支持 `channel` 字段，填 `"ai-agent"`（规划字段，当前 schema 暂无，后端支持后生效）。
