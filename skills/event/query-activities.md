@@ -23,10 +23,15 @@
 
 ## 返回
 
-`{success, count, activities: [...]}`，每项含：id、title、type、date、time、location、price、报名情况等。
+`{success, count, activities: [...]}`，每项含：id、title、type、date、time、location、price、
+max_participants、**current_participants**（已报名数）、organizer、description、tags、
+**cover_url**（活动封面图 URL）、**h5_url**（官网活动 H5 页，可直接分享给用户）。
 
 ## 注意
 
-- 结果为空时优先怀疑 `activity_type` 不精确（如"桌游"→"桌游聚会"），换标准词重试后再放宽 location/date
-- 展示时按时间排序，价格用 ¥ 前缀，报满的活动标注"已满员"
+- **匹配行为（2026-09-23 实测）**：activity_type 对 type 字段做子串包含匹配（大小写敏感），
+  不匹配 title/tags。如 "飞盘" 可命中 type="飞盘/球类" 的活动；"狼人杀" 这类玩法词命中为 0，改用 keyword 参数
+- **全量拉取**：不传 activity_type 返回当前全部活动（找局首选，再在结果里按用户条件筛选）
+- 结果为空时先全量拉取确认后台是否有活动，再逐步放宽 location/date
+- 展示时按时间排序，价格用 ¥ 前缀（0 元标"免费"），current_participants≥max_participants 标"已满员"
 - 拿到列表后追问用户要不要看某个详情或直接报名，一次最多推荐两个选项
