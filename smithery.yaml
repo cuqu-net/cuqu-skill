@@ -1,0 +1,15 @@
+startCommand:
+  type: stdio
+  configSchema:
+    type: object
+    properties:
+      cuquApiKey:
+        type: string
+        title: CUQU API Key
+        description: Optional cq-sk- key; enables write tools (create_activity, register_event, create_payment, check_in)
+  command: python
+  args:
+    - "-u"
+    - "server.py"
+  env:
+    CUQU_API_KEY: "{{cuquApiKey}}"
