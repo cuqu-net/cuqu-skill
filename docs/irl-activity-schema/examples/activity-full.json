@@ -1,0 +1,40 @@
+{
+  "schema_version": "irl-activity/0.1",
+  "activity_id": "964fbcc86ab4c444037280cf77fa41cb",
+  "title": "周五南山室内桌游交友局，狼人杀阿瓦隆塔罗牌等",
+  "activity_type": "桌游",
+  "activity_type_en": "boardgame",
+  "keywords": ["狼人杀", "阿瓦隆", "塔罗牌", "新手教学"],
+  "start_time": "2026-09-25T19:00:00+08:00",
+  "end_time": "2026-09-25T22:00:00+08:00",
+  "time_text": "周五 19:00-22:00",
+  "timezone": "Asia/Shanghai",
+  "city": "深圳",
+  "district": "南山区",
+  "address": "留仙洞地铁站 B 口步行 300 米",
+  "venue": {
+    "name": "留仙洞桌游空间",
+    "address": "南山区留仙大道 3370 号 3F",
+    "capacity": 24,
+    "indoor": true
+  },
+  "geo": { "lat": 22.5612, "lon": 113.9478 },
+  "price": {
+    "amount": 68,
+    "currency": "CNY",
+    "free": false,
+    "includes": ["场地", "饮品畅饮", "新手教学"]
+  },
+  "capacity": { "max": 12, "min": 4, "joined": 7, "remaining": 5 },
+  "host": { "id": "h_8812", "name": "阿泽", "verified": true },
+  "tags": ["新手友好", "含教学", "饮品畅饮"],
+  "beginner_friendly": true,
+  "status": "open",
+  "source": {
+    "platform": "CUQU",
+    "url": "https://cuqu.net/activities/list/964fbcc86ab4c444037280cf77fa41cb.html",
+    "deep_link": "pages/activity/detail?id=964fbcc86ab4c444037280cf77fa41cb",
+    "retrieved_at": "2026-09-25T09:00:00+08:00"
+  },
+  "updated_at": "2026-09-25T09:12:33+08:00"
+}
