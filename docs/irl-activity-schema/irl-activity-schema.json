@@ -1,0 +1,156 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://cuqu.net/schema/irl-activity/v0.1/irl-activity-schema.json",
+  "title": "IRL Activity Schema v0.1",
+  "description": "An open, minimal data structure for real-world (offline) activities, designed so AI agents can query, compare and book them. Authored by CUQU (cuqu.net). CC BY 4.0.",
+  "type": "object",
+  "required": ["schema_version", "activity_id", "title", "activity_type", "start_time", "city"],
+  "additionalProperties": true,
+  "properties": {
+    "schema_version": {
+      "type": "string",
+      "const": "irl-activity/0.1",
+      "description": "Schema identifier and version. Consumers MUST reject unknown major versions."
+    },
+    "activity_id": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 128,
+      "description": "Stable identifier, unique within the publishing platform. Opaque string; do not parse."
+    },
+    "title": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 120,
+      "description": "Human-readable title as published. May contain emoji."
+    },
+    "activity_type": {
+      "type": "string",
+      "description": "Canonical activity category. MUST be one of the standard terms; game/format names belong in keywords.",
+      "enum": [
+        "桌游", "飞盘", "徒步", "羽毛球", "钓鱼", "二次元", "读书会", "烘焙",
+        "KTV", "交友", "匹克球", "射箭", "心理疗愈", "旅游", "海上娱乐",
+        "登山", "相亲", "综合活动", "讲座/沙龙", "音乐会", "饭局"
+      ]
+    },
+    "activity_type_en": {
+      "type": "string",
+      "enum": [
+        "boardgame", "frisbee", "hiking", "badminton", "fishing", "anime", "bookclub", "baking",
+        "karaoke", "social", "pickleball", "archery", "wellness", "travel", "watersports",
+        "mountaineering", "matchmaking", "misc", "talk", "concert", "dinnerparty"
+      ],
+      "description": "Optional English equivalent of activity_type, for cross-locale consumers. Order matches the activity_type enum."
+    },
+    "keywords": {
+      "type": "array",
+      "items": { "type": "string", "maxLength": 40 },
+      "maxItems": 12,
+      "description": "Free-form format/game tags (e.g. 剧本杀, 狼人杀, City Walk, 露营). NEVER put these in activity_type."
+    },
+    "start_time": {
+      "type": "string",
+      "format": "date-time",
+      "description": "ISO 8601 with UTC offset, e.g. 2026-09-25T19:00:00+08:00. Offset is REQUIRED for offline events."
+    },
+    "end_time": {
+      "type": "string",
+      "format": "date-time",
+      "description": "ISO 8601 with UTC offset. Optional but strongly recommended."
+    },
+    "time_text": {
+      "type": "string",
+      "maxLength": 60,
+      "description": "Human-readable time as shown to users, e.g. '周六 19:00-22:00'. Useful when end_time is unknown."
+    },
+    "timezone": {
+      "type": "string",
+      "default": "Asia/Shanghai",
+      "description": "IANA timezone name. Defaults to Asia/Shanghai for CN publishers."
+    },
+    "city": { "type": "string", "minLength": 1, "maxLength": 40, "description": "City name as published, e.g. 深圳." },
+    "district": { "type": "string", "maxLength": 40, "description": "District / administrative area, e.g. 南山区." },
+    "address": { "type": "string", "maxLength": 200, "description": "Street-level address or landmark." },
+    "venue": {
+      "type": "object",
+      "properties": {
+        "name": { "type": "string", "maxLength": 120 },
+        "address": { "type": "string", "maxLength": 200 },
+        "capacity": { "type": "integer", "minimum": 0 },
+        "indoor": { "type": "boolean" }
+      },
+      "description": "Physical venue. May be omitted for meetup-point style activities."
+    },
+    "geo": {
+      "type": "object",
+      "properties": {
+        "lat": { "type": "number", "minimum": -90, "maximum": 90 },
+        "lon": { "type": "number", "minimum": -180, "maximum": 180 }
+      },
+      "required": ["lat", "lon"],
+      "description": "WGS-84 coordinates. GCJ-02 (Amap/WeChat) coordinates MUST be converted before publishing."
+    },
+    "price": {
+      "type": "object",
+      "required": ["currency"],
+      "properties": {
+        "amount": {
+          "type": "number",
+          "minimum": 0,
+          "description": "Per-person price in major currency units (yuan, not fen). MUST be 0 when free is true."
+        },
+        "currency": { "type": "string", "pattern": "^[A-Z]{3}$", "default": "CNY" },
+        "free": { "type": "boolean", "description": "Explicitly marks a no-charge activity. MUST NOT be inferred from amount==0 alone." },
+        "includes": {
+          "type": "array",
+          "items": { "type": "string", "maxLength": 60 },
+          "description": "What the price covers, e.g. 含教学, 含装备, 饮品畅饮."
+        }
+      },
+      "description": "Strongly recommended. Omitting price is allowed but agents SHOULD treat it as unknown, not free."
+    },
+    "capacity": {
+      "type": "object",
+      "properties": {
+        "max": { "type": "integer", "minimum": 1 },
+        "min": { "type": "integer", "minimum": 0, "description": "Minimum participants for the activity to happen." },
+        "joined": { "type": "integer", "minimum": 0 },
+        "remaining": { "type": "integer", "minimum": 0 }
+      },
+      "description": "If both joined and max are present, remaining SHOULD equal max - joined."
+    },
+    "host": {
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "maxLength": 64 },
+        "name": { "type": "string", "maxLength": 60 },
+        "verified": { "type": "boolean" }
+      }
+    },
+    "tags": {
+      "type": "array",
+      "items": { "type": "string", "maxLength": 30 },
+      "maxItems": 8,
+      "description": "Audience/attribute tags, e.g. 新手友好, 含教学, 女生局."
+    },
+    "beginner_friendly": { "type": "boolean", "description": "Whether newcomers are explicitly welcomed." },
+    "status": {
+      "type": "string",
+      "enum": ["open", "full", "cancelled", "ended", "draft"],
+      "default": "open",
+      "description": "Agents MUST NOT offer registration unless status == 'open'."
+    },
+    "source": {
+      "type": "object",
+      "required": ["platform"],
+      "properties": {
+        "platform": { "type": "string", "minLength": 1, "description": "Publishing platform name, e.g. CUQU." },
+        "url": { "type": "string", "format": "uri", "description": "Human-facing page." },
+        "deep_link": { "type": "string", "description": "App/mini-program path or scheme for direct jump. Opaque to consumers." },
+        "retrieved_at": { "type": "string", "format": "date-time" }
+      },
+      "description": "Provenance. Required for attribution; agents SHOULD echo it when citing an activity."
+    },
+    "updated_at": { "type": "string", "format": "date-time" }
+  }
+}
