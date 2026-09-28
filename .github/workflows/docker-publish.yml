@@ -35,8 +35,8 @@ jobs:
           push: true
           platforms: linux/amd64,linux/arm64
           tags: |
-            cuqu/cuqu-mcp:latest
-            cuqu/cuqu-mcp:${{ github.ref_name }}
+            cuqu-net/cuqu-mcp:latest
+            cuqu-net/cuqu-mcp:${{ github.ref_name }}
           # 镜像描述（Docker Hub 概览页展示）
           labels: |
             org.opencontainers.image.title=CUQU (找搭子) MCP Server
