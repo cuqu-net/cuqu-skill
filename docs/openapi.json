@@ -1,0 +1,117 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "CUQU (找搭子) — 线下活动公开接口",
+    "version": "1.0.0",
+    "summary": "深圳等 10+ 城市的线下兴趣组局查询（桌游/飞盘/徒步/羽毛球/二次元/钓鱼等 100+ 品类）",
+    "description": "CUQU找搭子（原名粗趣）平台的公开实时活动接口，用于让 AI 助手或任意应用查询线下兴趣社交活动。\n\n**能力边界（重要）**：\n- 本接口为**只读**，返回全量活动列表（无分页、无服务端过滤参数），请在调用侧按 `preference`（品类）、`location`（城市/地点）、`start_time`（开始时间戳）自行筛选。\n- 报名 / 支付 / 签到 / 发布活动属于**写操作**，不走本接口，需使用 MCP 端点 `https://agent.cuqu.net/mcp`（cq-sk- 个人密钥，申领见 https://cuqu.net/llms.txt）。\n- 数据为平台实时公开数据，无需鉴权。",
+    "contact": {
+      "name": "CUQU / 光天科技（深圳）有限公司",
+      "url": "https://cuqu.net"
+    },
+    "license": {
+      "name": "接口数据版权归平台所有；本文档与客户端实现为 MIT",
+      "url": "https://github.com/cuqu-net/cuqu-skill/blob/main/LICENSE"
+    }
+  },
+  "servers": [
+    { "url": "https://cuqu.net", "description": "生产（实时数据）" }
+  ],
+  "tags": [
+    { "name": "activities", "description": "活动查询" }
+  ],
+  "paths": {
+    "/api/activity": {
+      "get": {
+        "tags": ["activities"],
+        "operationId": "listActivities",
+        "summary": "拉取全量活动列表（实时）",
+        "description": "返回平台当前全部可查活动。无查询参数；若需筛选，请在客户端按字段过滤。",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "成功",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/ActivityResponse" },
+                "example": {
+                  "code": 0,
+                  "data": {
+                    "list": [
+                      {
+                        "_id": "ff4bc2646ab3757000bb2bde22c140b0",
+                        "title": "周五夜桌游局",
+                        "preference": "桌游",
+                        "fee_type": "free",
+                        "price": 0,
+                        "location": "深圳南山区XX桌游馆",
+                        "start_time": 1790750700000,
+                        "end_time": 1790761500000,
+                        "current_participants": 6,
+                        "max_participants": 12,
+                        "creator_name": "主理人昵称",
+                        "cover": "https://cuqu.net/…",
+                        "status": "open"
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "ActivityResponse": {
+        "type": "object",
+        "properties": {
+          "code": { "type": "integer", "description": "0 表示成功", "examples": [0] },
+          "msg": { "type": "string", "description": "失败时的错误信息" },
+          "data": {
+            "type": "object",
+            "properties": {
+              "list": {
+                "type": "array",
+                "items": { "$ref": "#/components/schemas/Activity" }
+              }
+            }
+          }
+        }
+      },
+      "Activity": {
+        "type": "object",
+        "properties": {
+          "_id": { "type": "string", "description": "活动唯一 ID（用于详情/报名/签到）" },
+          "title": { "type": "string", "description": "活动标题" },
+          "preference": { "type": "string", "description": "活动品类，如 桌游 / 羽毛球 / 飞盘 / 徒步" },
+          "fee_type": { "type": "string", "description": "费用类型，free / paid" },
+          "price": { "type": "number", "description": "费用（元），免费为 0" },
+          "location": { "type": "string", "description": "活动地点文本" },
+          "latitude": { "type": "number" },
+          "longitude": { "type": "number" },
+          "start_time": { "type": "integer", "description": "开始时间，毫秒级 Unix 时间戳" },
+          "end_time": { "type": "integer", "description": "结束时间，毫秒级 Unix 时间戳" },
+          "deadline_time": { "type": "integer", "description": "报名截止时间，毫秒级时间戳" },
+          "current_participants": { "type": "integer", "description": "已报名人数" },
+          "max_participants": { "type": "integer", "description": "人数上限" },
+          "min_group_size": { "type": "integer", "description": "成局下限人数" },
+          "creator_name": { "type": "string", "description": "主理人昵称" },
+          "creator_id": { "type": "string", "description": "主理人 ID" },
+          "cover": { "type": "string", "description": "封面图 URL" },
+          "status": { "type": "string", "description": "活动状态" },
+          "refund_rule": { "type": "string", "description": "退款规则" }
+        }
+      }
+    }
+  },
+  "x-cuqu-extensions": {
+    "mcpEndpoint": "https://agent.cuqu.net/mcp",
+    "mcpAuth": "写操作需 Bearer cq-sk- 个人密钥；读操作（initialize / tools/list）可匿名",
+    "llmsTxt": "https://cuqu.net/llms.txt",
+    "agentCard": "https://cuqu.net/.well-known/agent.json",
+    "note": "本 OpenAPI 仅供「只读查活动」场景；完整能力请使用 MCP 端点。"
+  }
+}
