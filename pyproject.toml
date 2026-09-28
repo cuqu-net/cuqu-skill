@@ -1,0 +1,36 @@
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "cuqu-mcp"
+version = "1.0.0"
+description = "MCP server for CUQU (找搭子) — find and book offline group events in 10+ China cities, or publish your own event."
+readme = "README.md"
+requires-python = ">=3.9"
+license = { file = "LICENSE" }
+authors = [
+    { name = "CUQU / 光天科技（深圳）有限公司" }
+]
+keywords = ["mcp", "cuqu", "model-context-protocol", "activities", "social", "events", "shenzhen"]
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    "Intended Audience :: Developers",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+]
+# 零依赖实现（仅用标准库），便于在任何 MCP 宿主里直接跑
+dependencies = []
+
+[project.urls]
+Homepage = "https://cuqu.net"
+Repository = "https://github.com/cuqu-net/cuqu-skill"
+"MCP endpoint" = "https://agent.cuqu.net/mcp"
+"llms.txt" = "https://cuqu.net/llms.txt"
+
+[project.scripts]
+cuqu-mcp = "server:main"
+
+[tool.setuptools]
+py-modules = ["server"]

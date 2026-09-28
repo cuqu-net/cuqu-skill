@@ -1,0 +1,35 @@
+name: Publish to PyPI
+
+# 触发：打 tag（与 Docker Hub 同一个 tag 一起跑）或手动 dispatch
+on:
+  push:
+    tags: ["v*"]
+  workflow_dispatch:
+
+jobs:
+  build-and-publish:
+    runs-on: ubuntu-latest
+    permissions:
+      id-token: write   # 支持 PyPI Trusted Publishing（若已配置，可免去 token）
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install build tooling
+        run: pip install --upgrade build twine
+
+      - name: Build sdist + wheel
+        run: python -m build
+
+      - name: Check metadata renders
+        run: twine check dist/*
+
+      - name: Publish to PyPI
+        uses: pypa/gh-action-pypi-publish@release/v1
+        with:
+          password: ${{ secrets.PYPI_API_TOKEN }}
+          # 若改用 Trusted Publishing，删掉上面这行 password 即可（需在 PyPI 项目里登记本 workflow）
