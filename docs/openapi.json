@@ -1,16 +1,15 @@
 {
-  "openapi": "3.1.0",
+  "openapi": "3.0.3",
   "info": {
     "title": "CUQU (找搭子) — 线下活动公开接口",
     "version": "1.0.0",
-    "summary": "深圳等 10+ 城市的线下兴趣组局查询（桌游/飞盘/徒步/羽毛球/二次元/钓鱼等 100+ 品类）",
-    "description": "CUQU找搭子（原名粗趣）平台的公开实时活动接口，用于让 AI 助手或任意应用查询线下兴趣社交活动。\n\n**能力边界（重要）**：\n- 本接口为**只读**，返回全量活动列表（无分页、无服务端过滤参数），请在调用侧按 `preference`（品类）、`location`（城市/地点）、`start_time`（开始时间戳）自行筛选。\n- 报名 / 支付 / 签到 / 发布活动属于**写操作**，不走本接口，需使用 MCP 端点 `https://agent.cuqu.net/mcp`（cq-sk- 个人密钥，申领见 https://cuqu.net/llms.txt）。\n- 数据为平台实时公开数据，无需鉴权。",
+    "description": "深圳等 10+ 城市的线下兴趣组局查询（桌游/飞盘/徒步/羽毛球/二次元/钓鱼等 100+ 品类）\n\nCUQU找搭子（原名粗趣）平台的公开实时活动接口，用于让 AI 助手或任意应用查询线下兴趣社交活动。\n\n【能力边界·重要】\n1. 本接口为只读，返回全量活动列表；接口侧不支持过滤与分页参数，请在调用侧按 preference（品类）、location（城市/地点）、start_time（毫秒时间戳）自行筛选。\n2. 报名 / 支付 / 签到 / 发布活动属于写操作，不走本接口，需使用 MCP 端点 https://agent.cuqu.net/mcp（cq-sk- 个人密钥，申领见 https://cuqu.net/llms.txt）。\n3. 数据为平台实时公开数据，无需鉴权。",
     "contact": {
       "name": "CUQU / 光天科技（深圳）有限公司",
       "url": "https://cuqu.net"
     },
     "license": {
-      "name": "接口数据版权归平台所有；本文档与客户端实现为 MIT",
+      "name": "接口数据版权归平台所有；本描述文件与客户端实现为 MIT",
       "url": "https://github.com/cuqu-net/cuqu-skill/blob/main/LICENSE"
     }
   },
@@ -26,11 +25,10 @@
         "tags": ["activities"],
         "operationId": "listActivities",
         "summary": "拉取全量活动列表（实时）",
-        "description": "返回平台当前全部可查活动。无查询参数；若需筛选，请在客户端按字段过滤。",
-        "parameters": [],
+        "description": "返回平台当前全部可查活动。无查询参数；如需按品类/城市/日期筛选，请在调用方自行过滤字段。",
         "responses": {
           "200": {
-            "description": "成功",
+            "description": "成功返回活动列表",
             "content": {
               "application/json": {
                 "schema": { "$ref": "#/components/schemas/ActivityResponse" },
@@ -50,7 +48,6 @@
                         "current_participants": 6,
                         "max_participants": 12,
                         "creator_name": "主理人昵称",
-                        "cover": "https://cuqu.net/…",
                         "status": "open"
                       }
                     ]
@@ -68,7 +65,7 @@
       "ActivityResponse": {
         "type": "object",
         "properties": {
-          "code": { "type": "integer", "description": "0 表示成功", "examples": [0] },
+          "code": { "type": "integer", "description": "0 表示成功", "example": 0 },
           "msg": { "type": "string", "description": "失败时的错误信息" },
           "data": {
             "type": "object",
@@ -109,9 +106,9 @@
   },
   "x-cuqu-extensions": {
     "mcpEndpoint": "https://agent.cuqu.net/mcp",
-    "mcpAuth": "写操作需 Bearer cq-sk- 个人密钥；读操作（initialize / tools/list）可匿名",
+    "mcpAuth": "写操作需 Bearer cq-sk- 个人密钥；读操作可匿名",
     "llmsTxt": "https://cuqu.net/llms.txt",
     "agentCard": "https://cuqu.net/.well-known/agent.json",
-    "note": "本 OpenAPI 仅供「只读查活动」场景；完整能力请使用 MCP 端点。"
+    "note": "本描述文件仅覆盖「只读查活动」能力；报名/支付/签到/发布请用 MCP 端点。"
   }
 }
