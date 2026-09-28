@@ -1,0 +1,45 @@
+name: Publish Docker image
+
+# 本机无 Docker 环境，改走 CI 构建发布。
+# 触发方式二选一：
+#   1) 打 tag：git tag v1.0.0 && git push origin v1.0.0
+#   2) GitHub 页面 Actions → Publish Docker image → Run workflow
+on:
+  push:
+    tags: ["v*"]
+  workflow_dispatch:
+
+jobs:
+  docker:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v3
+
+      - name: Set up Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Login to Docker Hub
+        uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+      - name: Build and push
+        uses: docker/build-push-action@v6
+        with:
+          context: .
+          file: ./Dockerfile
+          push: true
+          platforms: linux/amd64,linux/arm64
+          tags: |
+            cuqu/cuqu-mcp:latest
+            cuqu/cuqu-mcp:${{ github.ref_name }}
+          # 镜像描述（Docker Hub 概览页展示）
+          labels: |
+            org.opencontainers.image.title=CUQU (找搭子) MCP Server
+            org.opencontainers.image.description=MCP server for CUQU - local offline social activities in China (100+ categories, 10+ cities)
+            org.opencontainers.image.source=https://github.com/cuqu-net/cuqu-skill
+            org.opencontainers.image.url=https://cuqu.net
