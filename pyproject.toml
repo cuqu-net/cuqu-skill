@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "cuqu-mcp"
-version = "1.0.0"
+version = "1.0.1"
 description = "MCP server for CUQU (找搭子) — find and book offline group events in 10+ China cities, or publish your own event."
 readme = "README.md"
 requires-python = ">=3.9"
