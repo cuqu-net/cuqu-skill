@@ -5,6 +5,12 @@ Open-source MCP server giving AI agents live access to **[CUQU (找搭子)](http
 **Live demo endpoint (hosted):** `https://agent.cuqu.net/mcp` (Streamable HTTP, per-user `cq-sk-` keys — see [llms.txt](https://cuqu.net/llms.txt))
 **Agent Card:** https://cuqu.net/.well-known/agent.json
 
+**Talk to the agents (chat UI):**
+- Baidu Qianfan: https://appbuilder.baidu.com/s/w93d7Z6X (Chinese)
+- iFlytek Astron: https://agent.xfyun.cn/agentbuilder/chat?sharekey=998b5236b21fb85e005b9c9438f78b10&botId=5830291 (Chinese; API flow_id `7510896245077958656`)
+- Live weekly activities: https://cuqu.net/activities/list/ (real in-stock data, updated daily)
+- IRL Activity Schema v0.1 (CC BY 4.0): https://cuqu.net/schema/irl-activity/v0.1/irl-activity-schema.json
+
 ## What this repository contains
 
 | Path | What it is |
