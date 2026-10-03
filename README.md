@@ -1,4 +1,6 @@
-# CUQU (找搭子) MCP Server
+# CUQU找搭子 (CUQU) MCP Server
+
+[![smithery badge](https://smithery.ai/badge/liqi-cuhk/cuqu-mcp)](https://smithery.ai/servers/liqi-cuhk/cuqu-mcp)
 
 Open-source MCP server giving AI agents live access to **[CUQU (找搭子)](https://cuqu.net)** — a local offline social activities platform in China (Shenzhen-based, 10+ cities incl. Hong Kong, China). Users discover and book offline interest-based group activities (board games, frisbee, hiking, badminton, fishing, anime and 100+ more categories); organizers publish and run events.
 
@@ -21,8 +23,9 @@ Open-source MCP server giving AI agents live access to **[CUQU (找搭子)](http
 | `scripts/check-mcp.py` | Connectivity check for the hosted gateway. |
 | `skills/`, `docs/` | Agent skill manifests and platform integration docs (Qwen/Dify/Yuanqi). |
 
-## Tools (8)
+## Tools
 
+8 tools across the activity lifecycle:/n
 | Tool | Type | Description |
 |---|---|---|
 | `query_activities` | read (no key) | Search live activities by type / city / date — 100+ categories, real-time public data |
