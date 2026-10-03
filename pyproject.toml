@@ -4,15 +4,15 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "cuqu-mcp"
-version = "1.0.1"
-description = "MCP server for CUQU (找搭子) — find and book offline group events in 10+ China cities, or publish your own event."
+version = "1.0.2"
+description = "MCP server for CUQU找搭子 — find and book offline group activities in 10+ China cities, or publish your own event."
 readme = "README.md"
 requires-python = ">=3.9"
 license = { file = "LICENSE" }
 authors = [
     { name = "CUQU / 光天科技（深圳）有限公司" }
 ]
-keywords = ["mcp", "cuqu", "model-context-protocol", "activities", "social", "events", "shenzhen"]
+keywords = ["mcp", "cuqu", "cuqu-zhaodazi", "zhaodazi", "model-context-protocol", "activities", "social", "events", "shenzhen", "offline-events"]
 classifiers = [
     "Programming Language :: Python :: 3",
     "License :: OSI Approved :: MIT License",
