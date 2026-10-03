@@ -1,6 +1,6 @@
-# 粗趣开放平台后端规格（P1）
+# CUQU找搭子开放平台后端规格（P1）
 
-> 目标：复刻照面 open.zm.bio 的「扫码拿 Key → Agent 装技能 → Agent 代报名」链路，服务粗趣 AI Native 报名。
+> 目标：复刻照面 open.zm.bio 的「扫码拿 Key → Agent 装技能 → Agent 代报名」链路，服务 CUQU找搭子 AI Native 报名。
 > 本文档是给后端的对接规格，前端原型见 `cuqu-open-platform/index.html`（mock 已按此规格预留接口名）。
 
 ## 一、总体架构

@@ -43,7 +43,7 @@ def parse(resp):
 
 def main():
     if not KEY:
-        print("缺少 CUQU_API_KEY 环境变量，请到粗趣开放平台扫码获取")
+        print("缺少 CUQU_API_KEY 环境变量，请到CUQU找搭子开放平台扫码获取")
         return 1
     print("1/4 initialize ...")
     r = post({
@@ -73,7 +73,7 @@ def main():
     content = result.get("result", {}).get("content", [])
     preview = content[0].get("text", "")[:200] if content else json.dumps(result, ensure_ascii=False)[:200]
     print(f"   返回: {preview}")
-    print("\n全部通过，粗趣 skill 可正常使用")
+    print("\n全部通过，CUQU找搭子 skill 可正常使用")
     return 0
 
 
