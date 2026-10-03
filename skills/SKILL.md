@@ -5,7 +5,7 @@ description: CUQU找搭子（原名粗趣）线下兴趣社交平台技能。当
 
 # CUQU找搭子（原名粗趣）
 
-粗趣是深圳本地青年线下兴趣社交平台，覆盖 100+ 兴趣品类、10+ 城市。本 Skill 通过 MCP Streamable HTTP 调用CUQU找搭子服务，共 8 个工具。
+CUQU找搭子是深圳本地青年线下兴趣社交平台，覆盖 100+ 兴趣品类、10+ 城市。本 Skill 通过 MCP Streamable HTTP 调用CUQU找搭子服务，共 8 个工具。
 
 ## 环境变量
 

@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""粗趣 MCP 连通性自检：验证环境变量与服务可用性。
+"""CUQU找搭子 MCP 连通性自检：验证环境变量与服务可用性。
 用法: python scripts/check-mcp.py
 需要环境变量 CUQU_API_KEY（CUQU_MCP_HOST 可选，默认为当前生产地址）。
 """
