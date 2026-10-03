@@ -1,9 +1,9 @@
 {
   "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
   "name": "io.github.cuqu-net/cuqu-mcp",
-  "title": "CUQU (找搭子) MCP Server",
-  "description": "Find and book offline group events in 10+ China cities, or publish your own event. By CUQU.",
-  "version": "1.0.0",
+  "title": "CUQU找搭子 (CUQU) MCP Server",
+  "description": "CUQU找搭子 (CUQU): find and book offline group activities — board games, frisbee, hiking, badminton, fishing — across 10+ cities in China, or publish your own event. 8 tools, remote Streamable HTTP, no API key needed to search.",
+  "version": "1.0.2",
   "websiteUrl": "https://cuqu.net",
   "repository": {
     "url": "https://github.com/cuqu-net/cuqu-skill",
